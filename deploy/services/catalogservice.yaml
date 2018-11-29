@@ -31,9 +31,9 @@ spec:
         - name: data-load
           image: ckassen/catalogservice:latest
           command: ["flask", "import-data"]
-          envFrom: 
-            - 
-              configMapRef: 
+          envFrom:
+            -
+              configMapRef:
                 name: services-environment-config
           env:
             - name: FLASK_APP
@@ -69,9 +69,9 @@ spec:
             httpGet:
               path: "/api/v1/healthz"
               port: 8080
-          envFrom: 
-            - 
-              configMapRef: 
+          envFrom:
+            -
+              configMapRef:
                 name: services-environment-config
           env:
             - name: SECRET_KEY
@@ -79,6 +79,16 @@ spec:
                 secretKeyRef:
                   name: microservices-aws
                   key: catalogservice
+            - name: SECRET_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: microservices-aws
+                  key: dynamouserkey
+            - name: SECRET_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: microservices-aws
+                  key: dynamouservalue
           resources:
             requests:
               cpu: 800m

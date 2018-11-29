@@ -61,3 +61,5 @@ data:
   cartservice: zS+t5IyqWlRnm6WeoOPlXg==
   recommenderservice: WO7r9Dzn78vARQrKVMm67g==
   orderservice: 4vrwrwMmPkc/HLk4X64uXg==
+  dynamouserkey: <YourEncodedAWSAccessKey>
+  dynamouservalue:  <YourEncodedAWSSecretKey>
