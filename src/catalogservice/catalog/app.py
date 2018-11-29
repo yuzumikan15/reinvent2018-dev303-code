@@ -16,9 +16,11 @@
 #
 
 import boto3
-from flask import Flask, g 
+from flask import Flask, g
 
 from catalog.api.routes import api
+
+import os
 
 def create_app(config=None, testing=False):
     """Application factory, used to create application
@@ -29,7 +31,11 @@ def create_app(config=None, testing=False):
 
     register_blueprints(app)
 
-    ddb = boto3.resource('dynamodb', region_name=app.config['AWS_REGION'])
+    ddb = boto3.resource('dynamodb',
+    region_name=app.config['AWS_REGION'],
+    aws_access_key_id=os.environ.get('SECRET_USERNAME'),
+    aws_secret_access_key=os.environ.get('SECRET_PASSWORD')
+    )
     #app.config['ddb'] = ddb
     app.config['db'] = ddb.Table('ProductCatalog')
 
@@ -44,7 +50,7 @@ def configure_app(app, testing=False):
     if testing is True:
         # override with testing config
         app.config.from_object('catalog.configtest')
-    
+
 def register_blueprints(app):
     """register all blueprints for application
     """
