@@ -44,7 +44,8 @@ def get_product(product_id):
     try:
         res = current_app.config['db'].get_item(
             Key={
-                'id': product_id
+                # 'id': product_id
+                'id': '1051094507639'
             }
         )
     except ClientError as e:
